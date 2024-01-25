@@ -6,6 +6,8 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   position: fixed;
+  background: ${(props) => props.theme.background};
+  z-index: 2;
 `
 
 export const CheckoutController = styled.div`
@@ -32,25 +34,6 @@ export const CheckoutController = styled.div`
 
     svg {
       color: ${(props) => props.theme.purple};
-      width: 1.375rem;
-      height: 1.375rem;
-    }
-  }
-
-  button {
-    width: 2.375rem;
-    height: 2.375rem;
-    background: ${(props) => props.theme['yellow-light']};
-    border-radius: 6px;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid transparent;
-    cursor: pointer;
-
-    svg {
-      color: ${(props) => props.theme['yellow-dark']};
       width: 1.375rem;
       height: 1.375rem;
     }

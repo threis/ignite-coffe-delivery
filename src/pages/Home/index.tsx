@@ -1,3 +1,11 @@
+import { Banner } from '../../components/Banner'
+import { CoffeeGrid } from './CoffeeGrid'
+
 export function Home() {
-  return <div>Home</div>
+  return (
+    <>
+      <Banner />
+      <CoffeeGrid />
+    </>
+  )
 }
