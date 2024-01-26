@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.div`
+interface HeaderContainerProps {
+  isFixedPosition: boolean
+}
+
+export const HeaderContainer = styled.div<HeaderContainerProps>`
   width: 100%;
   padding: 2rem 10rem;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  position: ${(props) => (props.isFixedPosition ? 'fixed' : 'relative')};
   background: ${(props) => props.theme.background};
   z-index: 2;
 `

@@ -108,34 +108,3 @@ export const BuyOptions = styled.div`
     gap: 0.5rem;
   }
 `
-
-export const CounterController = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.25rem;
-  font-size: 1rem;
-  border-radius: 6px;
-
-  background: ${(props) => props.theme['base-button']};
-
-  button {
-    background: transparent;
-    border: none;
-    color: ${(props) => props.theme.purple};
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      height: 0.875rem;
-      width: 0.875rem;
-    }
-  }
-
-  span {
-    color: ${(props) => props.theme['base-title']};
-  }
-`

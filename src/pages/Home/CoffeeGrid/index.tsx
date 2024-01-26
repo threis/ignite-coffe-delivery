@@ -1,5 +1,4 @@
 import {
-  CounterController,
   BuyOptions,
   CoffeeCard,
   CoffeeGridContainer,
@@ -8,9 +7,9 @@ import {
   TagsInfo,
 } from './styles'
 import coffees from '../../../db.json'
-import { CartButton } from '../../../components/CartButton'
 import { formatBRLCurrency } from '../../../utils/formatCurrency'
-import { Minus, Plus } from 'phosphor-react'
+import { CounterButton } from '../../../components/CounterButton'
+import { CartButton } from '../../../components/CartButton'
 
 const folderPath = ' /src/assets/coffees/'
 
@@ -37,15 +36,7 @@ export function CoffeeGrid() {
               <BuyOptions>
                 <p>{priceFormattedBRL}</p>
                 <div>
-                  <CounterController>
-                    <button>
-                      <Minus />
-                    </button>
-                    <span>1</span>
-                    <button>
-                      <Plus />
-                    </button>
-                  </CounterController>
+                  <CounterButton height="2.235rem" />
                   <CartButton variant="purple" />
                 </div>
               </BuyOptions>
