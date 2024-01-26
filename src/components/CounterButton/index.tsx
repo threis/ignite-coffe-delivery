@@ -3,16 +3,32 @@ import { CounterController } from './styles'
 
 interface CounterButtonProps {
   height: string
+  amount: number
+  addCounterAmount: () => void | undefined
+  subtractCounterAmount: () => void | undefined
 }
 
-export function CounterButton({ height }: CounterButtonProps) {
+export function CounterButton({
+  height,
+  amount,
+  addCounterAmount,
+  subtractCounterAmount,
+}: CounterButtonProps) {
+  function handleSubtractAmount() {
+    subtractCounterAmount()
+  }
+
+  function handleAddAmount() {
+    addCounterAmount()
+  }
+
   return (
     <CounterController height={height}>
-      <button>
+      <button onClick={handleSubtractAmount}>
         <Minus />
       </button>
-      <span>1</span>
-      <button>
+      <span>{amount}</span>
+      <button onClick={handleAddAmount}>
         <Plus />
       </button>
     </CounterController>

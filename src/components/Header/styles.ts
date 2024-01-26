@@ -8,10 +8,16 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   width: 100%;
   padding: 2rem 10rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   position: ${(props) => (props.isFixedPosition ? 'fixed' : 'relative')};
   background: ${(props) => props.theme.background};
   z-index: 2;
+
+  a {
+    padding: 0;
+    height: 2.5rem;
+  }
 `
 
 export const CheckoutController = styled.div`

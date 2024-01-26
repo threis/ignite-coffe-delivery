@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const CheckoutFormContainer = styled.form`
   width: 100%;
@@ -132,38 +132,63 @@ export const PaymentBox = styled(BaseBox)`
   }
 `
 
-export const SelectionPaymentBox = styled.div`
+export const SelectPaymentBox = styled.div`
   display: flex;
   width: 100%;
   gap: 0.75rem;
   margin-top: 2rem;
+`
 
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    flex: 1 1 0;
-    transition: background-color 0.1s;
+interface PaymentOptionProps {
+  isChecked: boolean
+}
 
-    cursor: pointer;
-    background: ${(props) => props.theme['base-button']};
-    color: ${(props) => props.theme['base-text']};
-    padding: 1rem;
-    border-radius: 6px;
-    border: none;
+export const PaymentOption = styled.label<PaymentOptionProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex: 1 1 0;
+  transition: background-color 0.1s;
+  cursor: pointer;
 
-    font-size: 0.75rem;
-    line-height: 1.6;
+  padding: 1rem;
+  border-radius: 6px;
 
-    svg {
-      width: 1rem;
-      height: 1rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+
+  ${(props) => {
+    if (props.isChecked) {
+      return css`
+        background: ${(props) => props.theme['purple-light']};
+        border: 2px solid ${(props) => props.theme.purple};
+      `
+    } else {
+      return css`
+        background: ${(props) => props.theme['base-card']};
+        border: 2px solid transparent;
+      `
     }
+  }}
 
-    &:hover {
-      background: ${(props) => props.theme['base-hover']};
-    }
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &:hover {
+    ${(props) => {
+      if (!props.isChecked) {
+        return css`
+          background: ${(props) => props.theme['base-hover']};
+        `
+      }
+    }}
+  }
+
+  input[type='radio'] {
+    display: none;
   }
 `
 export const CartContainer = styled(BaseContainer)`

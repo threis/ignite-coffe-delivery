@@ -9,7 +9,20 @@ import {
 
 import Illustration from '../../assets/Illustration.svg'
 import { MapPin, CurrencyDollar, Timer } from 'phosphor-react'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 export function Success() {
+  const { customerAddress, paymentForm } = useContext(CartContext)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!customerAddress.address || !paymentForm.paymentType) {
+      navigate('/')
+    }
+  }, [navigate, customerAddress.address, paymentForm.paymentType])
+
   return (
     <Container>
       <header>
@@ -25,9 +38,9 @@ export function Success() {
               </Icon>
               <div>
                 <p>
-                  Entrega em <strong>Rua João Daniel Martinelli, 102 </strong>
+                  <strong>{`${customerAddress.address}, ${customerAddress.adressNumber} `}</strong>
                 </p>
-                <p>Farrapos - Porto Alegre, RS</p>
+                <p>{`${customerAddress.neighborhood} - ${customerAddress.city}, ${customerAddress.state}`}</p>
               </div>
             </Info>
             <Info>
@@ -45,7 +58,7 @@ export function Success() {
               </Icon>
               <div>
                 <p>Pagamento na entrega</p>
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentForm.paymentType}</strong>
               </div>
             </Info>
           </DeliveryInfo>

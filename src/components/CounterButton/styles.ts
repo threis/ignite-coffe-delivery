@@ -38,5 +38,9 @@ export const CounterController = styled.div<CounterControllerProps>`
 
   span {
     color: ${(props) => props.theme['base-title']};
+    width: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
