@@ -1,6 +1,6 @@
 import { CounterButton } from '../../../components/CounterButton'
 import { CartButton } from '../../../components/CartButton'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../../contexts/CartContext'
 import { BuyOptions, Container, ImageContainer, TagsInfo } from './styles'
 import { formatBRLCurrency } from '../../../utils/formatCurrency'
@@ -33,6 +33,7 @@ export function CoffeeCard({
   const { addNewOrUpdateCartItem } = useContext(CartContext)
 
   const priceFormattedBRL = formatBRLCurrency(price)
+  const [controlllerAddAnimation, setControlllerAddAnimation] = useState(false)
 
   function handleAddProductInCart({
     image,
@@ -46,7 +47,25 @@ export function CoffeeCard({
       price,
       quantity,
     })
+
+    setControlllerAddAnimation(true)
   }
+
+  useEffect(() => {
+    let timeout: number
+
+    if (controlllerAddAnimation) {
+      timeout = setTimeout(() => {
+        setControlllerAddAnimation(false)
+      }, 1000)
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
+    }
+  }, [controlllerAddAnimation])
 
   function subtractCounterAmount() {
     if (counter > 1) setCounter((state) => state - 1)
@@ -82,6 +101,7 @@ export function CoffeeCard({
             onClick={() =>
               handleAddProductInCart({ image, name, price, quantity: counter })
             }
+            isAnimationOn={controlllerAddAnimation}
           />
         </div>
       </BuyOptions>

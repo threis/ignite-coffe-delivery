@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 
 interface CartContextProviderProps {
   children: ReactNode
@@ -35,12 +35,24 @@ interface CartContextType {
   addPaymentForm: (newPaymentForm: PaymentFormData) => void
   getAmountItensInCart: () => number
   getTotalPriceInCart: () => number
+  clearCartStorage: () => void
 }
 
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cartList, setCartList] = useState<ProductData[]>([])
+  const [cartList, setCartList] = useState<ProductData[]>(() => {
+    const storedStateAsJSON = localStorage.getItem(
+      '@coffee-delivery:cart-1.0.0',
+    )
+
+    if (storedStateAsJSON) {
+      return JSON.parse(storedStateAsJSON)
+    }
+
+    return []
+  })
+
   const [customerAddress, setCustomerAddress] = useState<CustomerAddressData>(
     {} as CustomerAddressData,
   )
@@ -86,6 +98,18 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     return totalPrice
   }
 
+  function clearCartStorage() {
+    localStorage.setItem('@coffee-delivery:cart-1.0.0', '')
+  }
+
+  useEffect(() => {
+    if (cartList) {
+      const stateJSON = JSON.stringify(cartList)
+
+      localStorage.setItem('@coffee-delivery:cart-1.0.0', stateJSON)
+    }
+  }, [cartList])
+
   return (
     <CartContext.Provider
       value={{
@@ -98,6 +122,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         addPaymentForm,
         getAmountItensInCart,
         getTotalPriceInCart,
+        clearCartStorage,
       }}
     >
       {children}

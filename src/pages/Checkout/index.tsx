@@ -66,6 +66,7 @@ export function Checkout() {
     addNewOrUpdateCartItem,
     addCustomerAddress,
     addPaymentForm,
+    clearCartStorage,
   } = useContext(CartContext)
 
   const [checked, setChecked] = useState('')
@@ -116,6 +117,7 @@ export function Checkout() {
       zipCode: data.zipCode,
     })
     addPaymentForm({ paymentType: data.paymentType })
+    clearCartStorage()
     navigate('/success')
   }
 
